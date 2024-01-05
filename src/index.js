@@ -1,5 +1,5 @@
+require('dotenv').config();
 const { Client, IntentsBitField } = require('discord.js');
-const token = require('./token.json').token;
 
 
 const client = new Client({
@@ -18,9 +18,13 @@ client.on('ready', (c) => {
 client.on('messageCreate', (message) => {
     console.log(message.author.globalName + " " + message.content);
 
-    if(message.content === 'hello'){
-        message.reply('Hey!');
+    if(message.author.bot){
+        return;
+    }else {
+        if(message.content === 'hello'){
+            message.reply('hello');
+        }
     }
 });
 
-client.login(token);
+client.login(process.env.TOKEN);
